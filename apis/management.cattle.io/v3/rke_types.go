@@ -416,6 +416,8 @@ type IngressConfig struct {
 	Options map[string]string `yaml:"options" json:"options,omitempty"`
 	// NodeSelector key pair
 	NodeSelector map[string]string `yaml:"node_selector" json:"nodeSelector,omitempty"`
+	// Ingress controller resources requests and limits
+	Resources map[string]string `yaml:"resources" json:"resources,omitempty" norman:"type=array[json]"`
 	// Ingress controller extra arguments
 	ExtraArgs map[string]string `yaml:"extra_args" json:"extraArgs,omitempty"`
 	// DNS Policy
@@ -428,6 +430,10 @@ type IngressConfig struct {
 	ExtraVolumeMounts []ExtraVolumeMount `yaml:"extra_volume_mounts" json:"extraVolumeMounts,omitempty" norman:"type=array[json]"`
 	// nginx daemonset upgrade strategy
 	UpdateStrategy *DaemonSetUpdateStrategy `yaml:"update_strategy" json:"updateStrategy,omitempty"`
+}
+
+type Resources struct {
+	v1.ResourceRequirements
 }
 
 type ExtraEnv struct {
